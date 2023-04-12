@@ -1,0 +1,70 @@
+@import "../../assets/less/variables";
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4*@px 12*@px;
+  border-radius: 10*@px;
+  border: 0;
+  text-decoration: none;
+  font-size: 13*@px;
+  font-weight: 600;
+  line-height: 24*@px;
+  cursor: pointer;
+  user-select: none;
+
+  &._breadcrumb {
+    font-size: 10*@px;
+    text-transform: uppercase;
+  }
+
+  &._rounded {
+    border-radius: 1000vh;
+  }
+
+  &._shadowed {
+    box-shadow: 0 1*@px 5*@px rgba(0,0,0,0.15);
+  }
+
+  &._small {
+    padding: 0 12*@px;
+  }
+
+  &._medium {
+    padding: 3*@px 12*@px;
+  }
+
+  &._large {
+    padding: 6*@px 16*@px;
+  }
+
+  &._gray {
+    background: #43536b14; //todo: to variable
+    color: @colorDark;
+
+    &:hover {
+      background:#43536a29; //todo: to variable
+    }
+  }
+
+  &._primary {
+    background: @colorActionSecondary; //todo: to variable
+    color: @colorLight;
+
+    &:hover {
+      background: @colorActionSecondaryHover; //todo: to variable
+    }
+  }
+
+  &._green {
+    background: #ffffff;
+    color: #35c768;
+  }
+
+  &._white {
+    background: #ffffff;
+    color: @colorGray;
+  }
+
+}
