@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Modal from './helpers/stuikit/Modal';
 import { RULES } from './config'
@@ -27,28 +27,26 @@ if (window.history?.scrollRestoration) {
 
 function App() {
 	return (
-		<ErrorBoundary>
-			<Routes>
-				<Route path={RULES.start} element={<PageWrapp />}>
-					<Route index element={<Start />} />
-					{/* <Route path={RULES.chart} element={<Chart />} />
-					<Route path="*" element={<Error404 />} /> */}
-				</Route>
-			</Routes>
+		<React.StrictMode>
+			<ErrorBoundary>
 
-			<Modal />
+				<BrowserRouter>
+					<Routes>
+						<Route path={RULES.start} element={<PageWrapp />}>
+							<Route index element={<Start />} />
+							<Route path={RULES.chart} element={<Chart />} />
+							<Route path="*" element={<Error404 />} />
+						</Route>
+					</Routes>
 
-		</ErrorBoundary>
+					<Modal />
+
+				</BrowserRouter>
+			</ErrorBoundary>
+		</React.StrictMode>
 	);
 }
 
 
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
-);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
