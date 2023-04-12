@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-
+import { useAuth } from './../Auth/helpers'; 
 
 import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 
 export default function Start() {
 	const [show, toggleShow] = useState(true);
-
+	const auth = useAuth();
 
 
 

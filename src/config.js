@@ -1,5 +1,6 @@
 export const RULES = {
 	start: "/",
+	auth: "/auth",
 	chart: "/chart",
 }
 

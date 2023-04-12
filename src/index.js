@@ -7,10 +7,13 @@ import { RULES } from './config'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import PageWrapp from './components/PageWrapp';
+import Auth from './containers/Auth';
 import Start from './containers/Start';
 import Chart from './containers/Chart';
 import Error404 from './containers/Error404';
 
+
+import { AuthProvider, RequireAuth } from './containers/Auth/helpers';
 
 import './assets/scss/main.scss';
 
@@ -31,13 +34,19 @@ function App() {
 			<ErrorBoundary>
 
 				<BrowserRouter basename="/">
-					<Routes>
-						<Route path={RULES.start} element={<PageWrapp />}>
-							<Route index element={<Start />} />
-							<Route path={RULES.chart} element={<Chart />} />
-							<Route path="*" element={<Error404 />} />
-						</Route>
-					</Routes>
+
+					<AuthProvider>
+						<Routes>
+							<Route element={<PageWrapp />}>
+								<Route path={RULES.auth} element={<Auth />} />
+
+								<Route path={RULES.start} element={<RequireAuth><Start /></RequireAuth>} />
+								<Route path={RULES.chart} element={<RequireAuth><Chart /></RequireAuth>} />
+
+								<Route path="*" element={<Error404 />} />
+							</Route>
+						</Routes>
+					</AuthProvider>
 
 					<Modal />
 
