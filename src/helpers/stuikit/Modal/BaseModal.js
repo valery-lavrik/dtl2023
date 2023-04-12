@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../Modal'
 
-import './index.less';
+import './index.scss';
 
 const MODAL_INITIAL = {
 	children: null,

@@ -12,7 +12,7 @@ import Chart from './containers/Chart';
 import Error404 from './containers/Error404';
 
 
-import './assets/less/main.less';
+import './assets/scss/main.scss';
 
 import moment from 'moment'
 import 'moment/locale/ru'
