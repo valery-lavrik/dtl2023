@@ -1,20 +1,3 @@
-// import { createHashHistory } from 'history'
-
-// export const HISTORY = {
-// 	basename: '/',
-// 	hashType: 'noslash',
-// 	forceRefresh: false,
-// }
-
-
-// export const hashHistory = createHashHistory({
-// 	basename: '/', // The base URL of the app (see below)
-// 	hashType: 'noslash', // The hash type to use (see below)
-// 	// A function to use to confirm navigation with the user (see below)
-// 	getUserConfirmation: (message, callback) => callback(window.confirm(message))
-// });
-
-
 export const RULES = {
 	start: "/",
 	chart: "/chart",

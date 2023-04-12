@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom"; // https://reactrouter.com/en/main/start/concepts
 
 import Modal from './helpers/stuikit/Modal';
 import { RULES } from './config'
@@ -30,7 +30,7 @@ function App() {
 		<React.StrictMode>
 			<ErrorBoundary>
 
-				<BrowserRouter>
+				<BrowserRouter basename="/">
 					<Routes>
 						<Route path={RULES.start} element={<PageWrapp />}>
 							<Route index element={<Start />} />
@@ -49,4 +49,6 @@ function App() {
 
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(
+	document.getElementById('root')
+).render(<App />);
