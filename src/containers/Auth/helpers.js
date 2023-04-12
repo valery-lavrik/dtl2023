@@ -1,10 +1,11 @@
 import React from 'react';
 import { useLocation, Navigate } from "react-router-dom";
 import { RULES } from './../../config';
+import { getCookie, setCookie } from './../../helpers/stuikit/cookie';
 
 
-// чтоб разлогиниться надо
-// auth.signout(() => navigate("/"));
+
+const USER_KEY = 'USER_KEY_3';
 
 
 export let AuthContext = React.createContext(null);
@@ -19,25 +20,57 @@ export function AuthProvider({ children }) {
 	let [user, setUser] = React.useState(null);
 
 
-	let checkAuth = () => {
-		console.log('checkAuth');
-		// if () {
-		// 	setUser()
-		// }
+	let checkAuth = (success, error) => {
+		let user = getCookie(USER_KEY, null);
+		
+		if (!!user) {
+			try {
+				user = JSON.parse(user);
+			} catch (error) {
+				error();
+				return;
+			}
+
+			if (!!user) {
+				setUser(user);
+				success();
+			} else {
+				error();
+			}
+		} else {
+			error();
+		}
 	}
+
+
 
 	let signin = (login, pass, remember, success, error) => {
 
-		console.log('signin newUser', login, pass, remember);
-		error();
-		// return fakeAuthProvider.signin(() => {
-		// 	setUser(newUser);
-		// 	callback();
-		// });
+		// DEBUG
+		const fakeUser = {
+			login: 'admin',
+			pass: '123',
+			bearer: 'asdasd',
+		}
+
+		if (login === fakeUser.login && pass == fakeUser.pass) {
+			setUser(fakeUser);
+
+			if (remember) {
+				setCookie(USER_KEY, JSON.stringify(fakeUser));
+			}
+
+			success();
+		} else {
+			error();
+		}
 	};
+
+
 
 	let signout = (callback) => {
 		setUser(null);
+		setCookie(USER_KEY, null);
 		callback();
 	};
 

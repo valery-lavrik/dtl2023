@@ -14,6 +14,7 @@ import logo from './../../assets/img/graph-logo3.jpg';
 
 export default function Auth() {
 	const [validated, setValidated] = useState(false);
+	const [status, setStatus] = useState('load');
 	const [error, setError] = useState(false);
 	let auth = useAuth();
 	let navigate = useNavigate();
@@ -24,6 +25,9 @@ export default function Auth() {
 	useEffect(() => {
 		auth.checkAuth(() => {
 			navigate(from, { replace: true });
+			setStatus('');
+		}, () => {
+			setStatus('');
 		})
 	}, [])
 
@@ -43,11 +47,21 @@ export default function Auth() {
 		const pass = formData.get("pass");
 		const remember = formData.get("remember");
 
+		setStatus('load');
+
 		auth.signin(login, pass, remember, () => {
 			navigate(from, { replace: true });
 		}, () => {
 			setError('Проверьте логин и пароль');
 		});
+	}
+
+
+
+	if (status === 'load') {
+		return (
+			<p>Загрузка ...</p>
+		);
 	}
 
 
