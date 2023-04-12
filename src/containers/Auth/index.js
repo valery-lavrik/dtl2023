@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from './helpers';
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Alert from 'react-bootstrap/Alert';
+// Боря попросил убрать бутстрап
+// import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
+// import FloatingLabel from 'react-bootstrap/FloatingLabel';
+// import Alert from 'react-bootstrap/Alert';
 
 
 import logo from './../../assets/img/graph-logo3.jpg';
@@ -13,7 +14,7 @@ import logo from './../../assets/img/graph-logo3.jpg';
 
 
 export default function Auth() {
-	const [validated, setValidated] = useState(false);
+	// const [validated, setValidated] = useState(false);
 	const [status, setStatus] = useState('load');
 	const [error, setError] = useState(false);
 	let auth = useAuth();
@@ -29,6 +30,7 @@ export default function Auth() {
 		}, () => {
 			setStatus('');
 		})
+	// eslint-disable-next-line
 	}, [])
 
 
@@ -36,11 +38,10 @@ export default function Auth() {
 		event.preventDefault();
 		event.stopPropagation();
 
-
-		if (event.currentTarget.checkValidity() === false) {
-			setValidated(true);
-			return;
-		}
+		// if (event.currentTarget.checkValidity() === false) {
+		// 	setValidated(true);
+		// 	return;
+		// }
 
 		const formData = new FormData(event.currentTarget);
 		const login = formData.get("login");
@@ -51,8 +52,10 @@ export default function Auth() {
 
 		auth.signin(login, pass, remember, () => {
 			navigate(from, { replace: true });
+			setStatus('');
 		}, () => {
 			setError('Проверьте логин и пароль');
+			setStatus('');
 		});
 	}
 
@@ -95,77 +98,39 @@ export default function Auth() {
 					<div className="row d-flex justify-content-center">
 						<div className="col-lg-10">
 							<h2 className="fw-bold mb-5">Авторизация</h2>
-							<Form noValidate validated={validated} onSubmit={handleSubmit}>
+							<form onSubmit={handleSubmit}>
 
-								{/* <div className="form-outline mb-4">
-									<input type="email" id="form3Example3" className="form-control" />
-									<label className="form-label" htmlFor="form3Example3">Email address</label>
-								</div> */}
-								<FloatingLabel
-									controlId="floatingLogin"
-									label="Логин / email:"
-									className="mb-3"
-								>
-									<Form.Control name="login" type="text" placeholder="Логин / email:" required />
-								</FloatingLabel>
+								<div className="form-outline mb-4">
+									<input name="login" type="text" id="form3Example3" className="form-control" />
+									<label className="form-label" htmlFor="form3Example3">Логин / email:</label>
+								</div>
 
-								{/* <div className="form-outline mb-4">
-									<input type="password" id="form3Example4" className="form-control" />
-									<label className="form-label" htmlFor="form3Example4">Password</label>
-								</div> */}
-								<FloatingLabel
-									controlId="floatingPassword"
-									label="Пароль:"
-									className="mb-3"
-								>
-									<Form.Control name="pass" type="password" placeholder="Пароль:" required />
-								</FloatingLabel>
+								<div className="form-outline mb-4">
+									<input name="pass" type="password" id="form3Example4" className="form-control" />
+									<label className="form-label" htmlFor="form3Example4">Пароль</label>
+								</div>
 
 
 
 								<div className="form-check d-flex justify-content-center mb-4">
-									{/* <input className="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+									<input name="remember" className="form-check-input me-2" type="checkbox" onChange={() => { }} />
 									<label className="form-check-label" htmlFor="form2Example33">
-										Subscribe to our newsletter
-									</label> */}
-									<Form.Group className="d-flex justify-content-start mb-4" controlId="formBasicCheckbox">
-										<Form.Check name="remember" type="checkbox" label="Запомнить" />
-									</Form.Group>
+										Запомнить
+									</label>
 								</div>
 
 
 								{!!error && (
-									<Alert variant={'danger'}>{error}</Alert>
+									<div role="alert" className="fade alert alert-danger show">{error}</div>
 								)}
 
 
-								{/* <button type="submit" className="btn btn-primary btn-block mb-4">
-									Sign up
-								</button> */}
-
-								<Button variant="primary" type="submit">
+								<button type="submit" className="btn btn-primary btn-block mb-4">
 									Авторизоваться
-								</Button>
+								</button>
 
-								{/* <div className="text-center">
-									<p>or sign up with:</p>
-									<button type="button" className="btn btn-link btn-floating mx-1">
-										<i className="fab fa-facebook-f"></i>
-									</button>
 
-									<button type="button" className="btn btn-link btn-floating mx-1">
-										<i className="fab fa-google"></i>
-									</button>
-
-									<button type="button" className="btn btn-link btn-floating mx-1">
-										<i className="fab fa-twitter"></i>
-									</button>
-
-									<button type="button" className="btn btn-link btn-floating mx-1">
-										<i className="fab fa-github"></i>
-									</button>
-								</div> */}
-							</Form>
+							</form>
 						</div>
 					</div>
 				</div>

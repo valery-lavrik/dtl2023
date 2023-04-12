@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { useAuth } from './../Auth/helpers'; 
+// import { useAuth } from './../Auth/helpers'; 
 
 
 export default function Chart() {
-	const auth = useAuth();
+	// const auth = useAuth();
 
 
 

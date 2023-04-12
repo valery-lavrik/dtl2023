@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
 
 	let checkAuth = (success, error) => {
 		let user = getCookie(USER_KEY, null);
-		
+
 		if (!!user) {
 			try {
 				user = JSON.parse(user);
@@ -53,6 +53,7 @@ export function AuthProvider({ children }) {
 			bearer: 'asdasd',
 		}
 
+		// eslint-disable-next-line
 		if (login === fakeUser.login && pass == fakeUser.pass) {
 			setUser(fakeUser);
 
