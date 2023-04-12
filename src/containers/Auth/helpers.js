@@ -18,6 +18,14 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	let [user, setUser] = React.useState(null);
 
+
+	let checkAuth = () => {
+		console.log('checkAuth');
+		// if () {
+		// 	setUser()
+		// }
+	}
+
 	let signin = (login, pass, remember, success, error) => {
 
 		console.log('signin newUser', login, pass, remember);
@@ -29,14 +37,11 @@ export function AuthProvider({ children }) {
 	};
 
 	let signout = (callback) => {
-		console.log('signout');
-		// return fakeAuthProvider.signout(() => {
-		// 	setUser(null);
-		// 	callback();
-		// });
+		setUser(null);
+		callback();
 	};
 
-	let value = { user, signin, signout };
+	let value = { user, signin, signout, checkAuth };
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

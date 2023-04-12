@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from './helpers';
 
@@ -18,14 +18,20 @@ export default function Auth() {
 	let auth = useAuth();
 	let navigate = useNavigate();
 	let location = useLocation();
+	let from = location.state?.from?.pathname || "/";
 
 
+	useEffect(() => {
+		auth.checkAuth(() => {
+			navigate(from, { replace: true });
+		})
+	}, [])
 
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
-		let from = location.state?.from?.pathname || "/";
+
 
 		if (event.currentTarget.checkValidity() === false) {
 			setValidated(true);
@@ -43,6 +49,7 @@ export default function Auth() {
 			setError('Проверьте логин и пароль');
 		});
 	}
+
 
 
 
