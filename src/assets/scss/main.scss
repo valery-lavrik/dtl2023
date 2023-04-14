@@ -1,7 +1,7 @@
 // @import "~bootstrap/scss/bootstrap"; Боря попросил убрать бутстрап (и правильно сделал)
 
 @import "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
 
 $tab: 768px;
 $desk: 992px;
@@ -13,7 +13,7 @@ $bsh: 0 .4rem .4rem #0003;
 
 :root {
   --red: #E53935;
-  --yellow: #FDD835;
+  --yellow: #FFB300;
   --green: #4CAF50;
   --blue-grey-100: #ECEFF1;
   --blue-grey-200: #B0BEC5;
@@ -47,8 +47,16 @@ html {
 }
 
 body {
-  font: 1.6rem/2rem 'Zen Kaku Gothic Antique', sans-serif;
+  font: 1.6rem/2rem 'Ubuntu', sans-serif;
   color: var(--blue-grey-800);
+}
+
+.bg {
+  position: fixed;
+  background: #ffcccc;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .head {
@@ -59,9 +67,16 @@ body {
   @media (min-width: $tab) {
     padding: 4rem;
   }
+  @media (min-width: $desk) {
+    max-width: 140rem;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
 
   &__logo {
     width: calc(50% - 1rem);
+    position: relative;
+    z-index: 2;
     @media (min-width: $tab) {
       width: calc(25% - 1.5rem);
     }
@@ -86,6 +101,8 @@ body {
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+    position: relative;
+    z-index: 2;
     @media (min-width: $tab) {
       width: calc(25% - 1.5rem);
     }
@@ -102,7 +119,13 @@ body {
 
   &__logout {
     text-decoration: underline;
+    transition: text-decoration-color .2s;
     color: #ffffff;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration-color: #fff0;
+    }
   }
 }
 
@@ -243,10 +266,16 @@ body {
     appearance: none;
     border-radius: .5rem;
     padding: .4rem 3rem;
+    cursor: pointer;
+    transition: background-color .2s;
+    &:hover {
+      background: #5C6BC0;
+    }
   }
 
   &__checkbox {
     position: relative;
+    cursor: pointer;
 
     &-input {
       position: absolute;
@@ -299,5 +328,123 @@ body {
         }
       }
     }
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 2rem;
+  box-sizing: border-box;
+  padding: 0 2rem 2rem;
+  @media (min-width: $tab) {
+    padding: 0 4rem 4rem;
+    margin-top: -12rem;
+    &:before,
+    &:after {
+      content: '';
+      width: calc(25% - 1.5rem);
+      height: 8rem;
+    }
+    &:after {
+      order: 2;
+    }
+  }
+  @media (min-width: $desk) {
+    gap: 4rem;
+    max-width: 140rem;
+    margin: -12rem auto 0;
+    padding: 0 0 4rem;
+    &:before,
+    &:after {
+      width: 20rem;
+    }
+  }
+}
+
+.cards__item {
+  width: calc(50% - 1rem);
+  background: #ffffff;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  box-shadow: $bsh;
+  border-radius: .5rem;
+  min-height: 8rem;
+  transition: background-color .2s, box-shadow .2s;
+  cursor: pointer;
+  @media (min-width: $tab) {
+    width: calc(25% - 1.5rem);
+    order: 1;
+    &:nth-child(n+3) {
+      order: 3;
+    }
+  }
+  @media (min-width: $desk) {
+    width: 20rem;
+    min-height: 8rem;
+    &:nth-child(n+3) {
+      order: 1;
+    }
+    &:nth-child(n+5) {
+      order: 3;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 .4rem #9FA8DA;
+  }
+}
+
+.cards__id {
+  font-size: 1.2rem;
+
+  &:before {
+    content: '#';
+  }
+
+  @media (min-width: $desk) {
+    font-size: 1.6rem;
+  }
+}
+
+.cards__name {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  @media (min-width: $desk) {
+    font-size: 1.6rem;
+  }
+}
+
+.cards__status {
+  position: absolute;
+  top: 1.4rem;
+  right: 1rem;
+  font-weight: bold;
+  font-size: 0;
+  line-height: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  @media (min-width: $desk) {
+    //font-size: 1.6rem;
+  }
+
+  ._1 & {
+    background-color: var(--green);
+  }
+
+  ._2 & {
+    background-color: var(--yellow);
+  }
+
+  ._3 & {
+    background-color: var(--red);
   }
 }

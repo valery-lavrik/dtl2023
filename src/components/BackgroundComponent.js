@@ -147,7 +147,7 @@ const options = {
 
 export default function BackgroundComponent() {
 	return (
-		<div>
+		<div className="bg">
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={options}
