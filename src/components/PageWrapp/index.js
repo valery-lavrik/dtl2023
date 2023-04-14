@@ -6,7 +6,6 @@ import BackgroundComponent from './../../components/BackgroundComponent';
 import './index.scss';
 
 
-
 export default function PageWrapp() {
 	const auth = useAuth();
 	let navigate = useNavigate();
@@ -14,44 +13,30 @@ export default function PageWrapp() {
 	const isAuth = !!auth?.user?.bearer;
 
 
-
-
 	return (
 		<div>
+			<header className="head">
 
 
-			{/* Вот компанента которая должна быть на фоне только на экране авторизации */}
-			{location.pathname === '/auth' && (
-				<BackgroundComponent />
-			)}
+				{/* Вот компанента которая должна быть на фоне только на экране авторизации */}
+				{location.pathname === '/auth' && (
+					<BackgroundComponent />
+				)}
 
-
-			<div style={{ border: '1px solid red', background: '#bbbdbb' }}>
-
-				<img alt="logo" src={logo} />
-				<br />
-
-				HEADER BLYAT!
+				<img src={logo} alt="logo" className="head__logo" />
 
 				{!!isAuth ? (
-					<div>
-						<p>NAME: {auth?.user?.fio}</p>
-
-						<p>
-							<button onClick={(e) => {
-								e.preventDefault();
-								auth.signout(() => navigate('/', { replace: true }));
-							}}>Выйти</button>
-						</p>
-
+					<div className="head__profile">
+						<div className="head__name">{auth?.user?.fio}</div>
+						<div className="head__logout" onClick={(e) => {
+							e.preventDefault();
+							auth.signout(() => navigate('/', { replace: true }));
+						}}>Выйти
+						</div>
 					</div>
-				) : (
-					<div>
-						Не авторизован
-					</div>
-				)}
-			</div>
+				) : ''}
+			</header>
 			<Outlet />
-		</div >
+		</div>
 	);
 }
