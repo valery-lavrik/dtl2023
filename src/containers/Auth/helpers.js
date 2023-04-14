@@ -48,6 +48,7 @@ export function AuthProvider({ children }) {
 
 		// DEBUG
 		const fakeUser = {
+			fio: 'Иванов Иван Иваныч',
 			login: 'admin',
 			pass: '123',
 			bearer: 'asdasd',
@@ -55,13 +56,17 @@ export function AuthProvider({ children }) {
 
 		// eslint-disable-next-line
 		if (login === fakeUser.login && pass == fakeUser.pass) {
-			setUser(fakeUser);
 
-			if (remember) {
-				setCookie(USER_KEY, JSON.stringify(fakeUser));
-			}
 
-			success();
+			setTimeout(() => {
+				setUser(fakeUser);
+
+				if (remember) {
+					setCookie(USER_KEY, JSON.stringify(fakeUser));
+				}
+				success();
+			}, 2000);
+
 		} else {
 			error();
 		}
