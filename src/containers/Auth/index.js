@@ -58,11 +58,11 @@ export default function Auth() {
 			<h2 className="auth__title">Авторизация</h2>
 			<form className="auth__form" onSubmit={handleSubmit}>
 				<label className="auth__label _text" htmlFor="form3Example3">
-					<input type="text" className="auth__area" placeholder=" " id="form3Example3" name="login" />
+					<input type="text" className="auth__area" placeholder="example@site.com" id="form3Example3" name="login" />
 					<span className="auth__desc">Логин / e-mail</span>
 				</label>
 				<label className="auth__label _text" htmlFor="form3Example4">
-					<input type="password" className="auth__area" placeholder=" " id="form3Example4" name="pass" />
+					<input type="password" className="auth__area" placeholder="••••••••••" id="form3Example4" name="pass" />
 					<span className="auth__desc">Пароль</span>
 				</label>
 				{!!error && (
