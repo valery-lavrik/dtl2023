@@ -17,6 +17,9 @@ export default function BackgroundComponent() {
 }
 
 
+
+
+
 // const options = {
 // 	chart: {
 // 		zoomType: 'xy'
