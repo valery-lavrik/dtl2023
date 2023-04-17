@@ -53,12 +53,20 @@ body {
 
 .bg {
   position: fixed;
-//   background: #ffcccc;
+  //   background: #ffcccc;
   right: 0;
   bottom: 0;
   left: 0;
   top: 0;
   z-index: -1;
+}
+
+.bg__image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .head {
@@ -394,6 +402,25 @@ body {
     }
   }
 
+  &._1 {
+    background-color: #C8E6C9;
+  }
+
+  &._2 {
+    background-color: #FFECB3;
+  }
+
+  @keyframes pulse { //вот тут описание анимации пульсации
+    50% {
+      box-shadow: 0 0 2rem .3rem var(--red), $bsh; //трогай 2rem, если хочешь регулировать размер свечения и .3rem если хочешь регулировать уровень закрашенности свечения
+    }
+  }
+
+  &._3 {
+    background-color: #FFCDD2;
+    animation: pulse linear infinite 1s 0s; //подключаем пульсацию. Хочешь регулировать скорость - трогай 1s
+  }
+
   &:hover {
     box-shadow: 0 0 0 .4rem #9FA8DA;
   }
@@ -433,15 +460,4 @@ body {
     //font-size: 1.6rem;
   }
 
-  ._1 & {
-    background-color: var(--green);
-  }
-
-  ._2 & {
-    background-color: var(--yellow);
-  }
-
-  ._3 & {
-    background-color: var(--red);
-  }
 }
