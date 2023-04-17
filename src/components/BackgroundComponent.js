@@ -7,7 +7,7 @@ import bg from './../assets/img/graph-logo-2.jpg'
 export default function BackgroundComponent() {
 	return (
 		<div className="bg">
-			<img src={bg} />
+			<img alt="bg" src={bg} />
 			{/* <HighchartsReact
 				highcharts={Highcharts}
 				options={options}
