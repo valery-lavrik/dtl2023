@@ -82,6 +82,7 @@ body {
     margin: 0 auto;
     padding: 4rem 0;
   }
+
   &._lk {
     @media (min-width: $tab) {
       padding-top: 6rem;
@@ -380,12 +381,22 @@ body {
       z-index: -1;
     }
   }
+
   &__item {
     font-size: 1.4rem;
     padding: 1rem;
+    transition: background-color .2s;
+    user-select: none;
+
     &._selected {
       color: #fff;
       background-color: var(--indigo);
+      cursor: default;
+    }
+
+    &:not(._selected):hover {
+      background: #3949AB66;
+      cursor: pointer;
     }
   }
 }
