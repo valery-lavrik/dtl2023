@@ -9,7 +9,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import PageWrapp from './components/PageWrapp';
 import Auth from './containers/Auth';
 import Start from './containers/Start';
-import Chart from './containers/Chart';
+// import Chart from './containers/Chart';
 import Error404 from './containers/Error404';
 
 
@@ -41,7 +41,7 @@ function App() {
 								<Route path={RULES.auth} element={<Auth />} />
 
 								<Route path={RULES.start} element={<RequireAuth><Start /></RequireAuth>} />
-								<Route path={RULES.chart} element={<RequireAuth><Chart /></RequireAuth>} />
+								{/* <Route path={RULES.chart} element={<RequireAuth><Chart /></RequireAuth>} /> */}
 
 								<Route path="*" element={<Error404 />} />
 							</Route>

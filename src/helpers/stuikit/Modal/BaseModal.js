@@ -93,7 +93,7 @@ export default class BaseModal extends Component {
 
 
 	render() {
-		
+
 		if (!this.state.modals.length)
 			return null;
 
@@ -102,14 +102,11 @@ export default class BaseModal extends Component {
 				const { className, children, close, title } = modal;
 
 				return (
-					<div 
-						key={key}
-						className={'base-modal__over _open ' + className}
-					>
-						<div className="base-modal">
+					<div key={key} className={'modal ' + className} >
+						<div className="modal__box">
 
 							{!!close && (
-								<button className="base-modal__close" onClick={() => {
+								<button className="modal__close" onClick={() => {
 									BaseModal.item.closeLastModal();
 									close();
 									Modal.wrapperCloseHandler();
@@ -117,9 +114,9 @@ export default class BaseModal extends Component {
 								</button>
 							)}
 
-							{!!title && <h2 className="base-modal__title base-title _h2">{title}</h2>}
+							{!!title && <h2 className="modal__title">{title}</h2>}
 
-							<div className="base-modal__content">
+							<div className="modal__content">
 								{!!children && children}
 							</div>
 						</div>

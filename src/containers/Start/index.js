@@ -1,4 +1,6 @@
 import React from 'react';
+import Modal from './../../helpers/stuikit/Modal';
+import Chart from './../Chart';
 // import { Link } from "react-router-dom";
 // import { useAuth } from './../Auth/helpers'; 
 
@@ -83,15 +85,16 @@ export default function Start() {
 
 
 	const onPress = (card) => {
-		console.log('card', card);
+		Modal.component(<Chart card={card} />, '_s600', 'График ' + card.name, () => { })
 	}
+
 
 	return (
 		<>
 
 			{/* ТАБЫ */}
 			<nav className="tabs">
-				Подразделения: 
+				Подразделения:
 				<div className="tabs__item">Цех 1</div>
 				<div className="tabs__item _selected">Цех 2</div>
 				<div className="tabs__item">Цех 3</div>
