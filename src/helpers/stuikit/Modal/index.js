@@ -19,8 +19,8 @@ export default class Modal extends BaseModal {
 
 			$(document).off('keydown');
 			$('body')
-				.off('click', '.base-modal__over._open')
-				.removeClass('bodyModalOpen base-preload _fixed _big-preloader');
+				.off('click', '.modal')
+				.removeClass('bodyModalOpen');
 
 		} else {
 			if (!!onClose) {
@@ -35,7 +35,7 @@ export default class Modal extends BaseModal {
 
 				//	outside click
 				if (closeByOusideClick) {
-					$('body').addClass('bodyModalOpen').off('click').on('click', '.base-modal__over._open', (e) => {
+					$('body').addClass('bodyModalOpen').off('click').on('click', '.modal', (e) => {
 						if (e.target && e.target.contains(e.currentTarget)) {
 							Modal.hide();
 							if (!!onClose) onClose();
@@ -187,7 +187,7 @@ export default class Modal extends BaseModal {
 
 		// Это для loaderWithoutModal
 		if ($('._big-preloader').length) {
-			$('body').removeClass('bodyModalOpen base-preload _fixed _big-preloader');
+			$('body').removeClass('bodyModalOpen');
 		}
 
 		Modal.wrapperCloseHandler();
