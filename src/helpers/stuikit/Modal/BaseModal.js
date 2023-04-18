@@ -106,12 +106,13 @@ export default class BaseModal extends Component {
 						<div className="modal__box">
 
 							{!!close && (
-								<button className="modal__close" onClick={() => {
+								<div className="modal__close" onClick={() => {
 									BaseModal.item.closeLastModal();
 									close();
 									Modal.wrapperCloseHandler();
 								}}>
-								</button>
+									Закрыть
+								</div>
 							)}
 
 							{!!title && <h2 className="modal__title">{title}</h2>}

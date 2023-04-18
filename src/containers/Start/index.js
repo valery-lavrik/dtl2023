@@ -85,7 +85,7 @@ export default function Start() {
 
 
 	const onPress = (card) => {
-		Modal.component(<Chart card={card} />, '_s600', 'График ' + card.name, () => { })
+		Modal.component(<Chart card={card} />, '', 'График ' + card.name, () => { })
 	}
 
 
