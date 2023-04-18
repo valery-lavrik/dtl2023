@@ -10,7 +10,7 @@ export default class Loader extends Component {
 
 		return (
 			<div className="loader">
-				Lodaing...
+				Loading...
 				{!!title && <div className="loader__title">{title}</div>}
 			</div>
 		);

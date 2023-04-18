@@ -19,7 +19,7 @@ export default function PageWrapp() {
             {location.pathname === '/auth' && (
                 <BackgroundComponent/>
             )}
-            <header className="head">
+            <header className={'head' + (isAuth ? ' _lk' : '')}>
 
                 <img src={logo} alt="logo" className="head__logo"/>
 
@@ -34,6 +34,13 @@ export default function PageWrapp() {
                     </div>
                 ) : ''}
             </header>
+            {isAuth && (
+                <nav className="tabs">
+                    <div className="tabs__item">Парадная</div>
+                    <div className="tabs__item _selected">Шоколадная</div>
+                    <div className="tabs__item">Виноградная</div>
+                </nav>
+            )}
             <Outlet/>
         </>
     );

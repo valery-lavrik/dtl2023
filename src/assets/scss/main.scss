@@ -59,14 +59,14 @@ body {
   left: 0;
   top: 0;
   z-index: -1;
-}
 
-.bg__image {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  display: block;
-  object-fit: cover;
+  &__image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
 }
 
 .head {
@@ -81,6 +81,14 @@ body {
     max-width: 140rem;
     margin: 0 auto;
     padding: 4rem 0;
+  }
+  &._lk {
+    @media (min-width: $tab) {
+      padding-top: 6rem;
+    }
+    @media (min-width: $desk) {
+      padding-top: 8rem;
+    }
   }
 
   &__logo {
@@ -336,6 +344,52 @@ body {
   }
 }
 
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffd;
+  margin-bottom: 2rem;
+  @media (min-width: $tab) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0 3rem;
+    margin-bottom: 0;
+  }
+  @media (min-width: $desk) {
+    padding: 0;
+    background: none;
+    max-width: 142rem;
+    left: 50%;
+    margin-left: -71rem;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -50vw;
+      width: 100vw;
+      background: #fffd;
+      z-index: -1;
+    }
+  }
+  &__item {
+    font-size: 1.4rem;
+    padding: 1rem;
+    &._selected {
+      color: #fff;
+      background-color: var(--indigo);
+    }
+  }
+}
+
 .cards {
   display: flex;
   flex-direction: row;
@@ -367,97 +421,97 @@ body {
       width: 20rem;
     }
   }
-}
 
-.cards__item {
-  width: calc(50% - 1rem);
-  background: #ffffff;
-  box-sizing: border-box;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  position: relative;
-  box-shadow: $bsh;
-  border-radius: .5rem;
-  min-height: 8rem;
-  transition: background-color .2s, box-shadow .2s;
-  cursor: pointer;
-  @media (min-width: $tab) {
-    width: calc(25% - 1.5rem);
-    order: 1;
-    &:nth-child(n+3) {
-      order: 3;
-    }
-  }
-  @media (min-width: $desk) {
-    width: 20rem;
+  &__item {
+    width: calc(50% - 1rem);
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    box-shadow: $bsh;
+    border-radius: .5rem;
     min-height: 8rem;
-    &:nth-child(n+3) {
+    transition: background-color .2s, box-shadow .2s;
+    cursor: pointer;
+    @media (min-width: $tab) {
+      width: calc(25% - 1.5rem);
       order: 1;
+      &:nth-child(n+3) {
+        order: 3;
+      }
     }
-    &:nth-child(n+5) {
-      order: 3;
+    @media (min-width: $desk) {
+      width: 20rem;
+      min-height: 8rem;
+      &:nth-child(n+3) {
+        order: 1;
+      }
+      &:nth-child(n+5) {
+        order: 3;
+      }
+    }
+
+    &._1 {
+      background-color: #C8E6C9;
+    }
+
+    &._2 {
+      background-color: #FFECB3;
+    }
+
+    @keyframes pulse { //вот тут описание анимации пульсации
+      50% {
+        box-shadow: 0 0 2rem .3rem var(--red), $bsh; //трогай 2rem, если хочешь регулировать размер свечения и .3rem если хочешь регулировать уровень закрашенности свечения
+      }
+    }
+
+    &._3 {
+      background-color: #FFCDD2;
+      animation: pulse linear infinite 1s 0s; //подключаем пульсацию. Хочешь регулировать скорость - трогай 1s
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 .4rem #9FA8DA;
     }
   }
 
-  &._1 {
-    background-color: #C8E6C9;
-  }
+  &__id {
+    font-size: 1.2rem;
 
-  &._2 {
-    background-color: #FFECB3;
-  }
+    &:before {
+      content: '#';
+    }
 
-  @keyframes pulse { //вот тут описание анимации пульсации
-    50% {
-      box-shadow: 0 0 2rem .3rem var(--red), $bsh; //трогай 2rem, если хочешь регулировать размер свечения и .3rem если хочешь регулировать уровень закрашенности свечения
+    @media (min-width: $desk) {
+      font-size: 1.6rem;
     }
   }
 
-  &._3 {
-    background-color: #FFCDD2;
-    animation: pulse linear infinite 1s 0s; //подключаем пульсацию. Хочешь регулировать скорость - трогай 1s
+  &__name {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    @media (min-width: $desk) {
+      font-size: 1.6rem;
+    }
   }
 
-  &:hover {
-    box-shadow: 0 0 0 .4rem #9FA8DA;
+  &__status {
+    position: absolute;
+    top: 1.4rem;
+    right: 1rem;
+    font-weight: bold;
+    font-size: 0;
+    line-height: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    @media (min-width: $desk) {
+      //font-size: 1.6rem;
+    }
+
   }
-}
-
-.cards__id {
-  font-size: 1.2rem;
-
-  &:before {
-    content: '#';
-  }
-
-  @media (min-width: $desk) {
-    font-size: 1.6rem;
-  }
-}
-
-.cards__name {
-  margin-top: 2rem;
-  font-size: 1.2rem;
-  @media (min-width: $desk) {
-    font-size: 1.6rem;
-  }
-}
-
-.cards__status {
-  position: absolute;
-  top: 1.4rem;
-  right: 1rem;
-  font-weight: bold;
-  font-size: 0;
-  line-height: 0;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  @media (min-width: $desk) {
-    //font-size: 1.6rem;
-  }
-
 }
