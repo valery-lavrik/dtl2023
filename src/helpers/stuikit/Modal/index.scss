@@ -1,0 +1,90 @@
+@import "../../../../src/assets/scss/variables";
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: #37474Fdd;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1rem 1fr 1rem;
+  overflow: auto;
+  grid-template-rows: minmax(4.4rem, 1fr) auto minmax(1rem, 1fr);
+  @media (min-width: $tab) {
+    grid-template-columns: 2rem 1fr 2rem;
+    grid-template-rows: minmax(6.2rem, 1fr) auto minmax(2rem, 1fr);
+  }
+  @media (min-width: $desk) {
+    grid-template-columns: 1fr 136rem 1fr; //тут ширина модалки на десктопе
+    grid-template-rows: minmax(8rem, 1fr) auto minmax(4rem, 1fr);
+  }
+
+  &__box {
+    background-color: #fff;
+    grid-area: 2 / 2 / 3 / 3;
+    position: relative;
+  }
+
+  &__close {
+    font-size: 0;
+    line-height: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    top: -3.4rem;
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    cursor: pointer;
+    @media (min-width: $tab) {
+      width: 3.2rem;
+      height: 3.2rem;
+      top: -5.2rem;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5rem;
+      height: .4rem;
+      background: #ffffff;
+      margin: -.2rem 0 0 -2.5rem;
+      transition: background-color .2s;
+    }
+
+    &:before {
+      transform: rotate(-45deg);
+    }
+
+    &:after {
+      transform: rotate(45deg);
+    }
+    @media (min-width: $desk) {
+      &:hover:before,
+      &:hover:after {
+        background: var(--yellow);
+      }
+    }
+  }
+
+  &__title {
+    padding: 1rem;
+    margin: 0;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    color: var(--indigo);
+    @media (min-width: $tab) {
+      padding: 2rem;
+    }
+    @media (min-width: $desk) {
+      padding: 4rem;
+    }
+  }
+}

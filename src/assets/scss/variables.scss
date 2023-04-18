@@ -1,0 +1,24 @@
+$tab: 768px;
+$desk: 992px;
+$full: 1440px;
+$fhd: 1920px;
+
+$bsh: 0 .4rem .4rem #0003;
+
+
+:root {
+  --red: #E53935;
+  --yellow: #FFB300;
+  --green: #4CAF50;
+  --blue-grey-100: #ECEFF1;
+  --blue-grey-200: #B0BEC5;
+  --blue-grey-400: #78909C;
+  --blue-grey-800: #37474F;
+  --indigo: #3949AB;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
