@@ -80,7 +80,13 @@ export function AuthProvider({ children }) {
 		callback();
 	};
 
-	let value = { user, signin, signout, checkAuth };
+
+
+	let isAuth = () => {
+		return !!user?.bearer;
+	};
+
+	let value = { user, signin, signout, checkAuth, isAuth };
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

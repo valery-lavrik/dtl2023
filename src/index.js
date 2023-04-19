@@ -32,9 +32,7 @@ function App() {
 	return (
 		<React.StrictMode>
 			<ErrorBoundary>
-
 				<BrowserRouter basename="/">
-
 					<AuthProvider>
 						<Routes>
 							<Route element={<PageWrapp />}>
@@ -46,10 +44,10 @@ function App() {
 								<Route path="*" element={<Error404 />} />
 							</Route>
 						</Routes>
+
+						<Modal />
+
 					</AuthProvider>
-
-					<Modal />
-
 				</BrowserRouter>
 			</ErrorBoundary>
 		</React.StrictMode>

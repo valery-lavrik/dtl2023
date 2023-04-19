@@ -10,7 +10,6 @@ export default function PageWrapp() {
 	const auth = useAuth();
 	let navigate = useNavigate();
 	let location = useLocation();
-	const isAuth = !!auth?.user?.bearer;
 
 
 	return (
@@ -20,11 +19,11 @@ export default function PageWrapp() {
 				<BackgroundComponent />
 			)}
 
-			<header className={'head' + (isAuth ? ' _lk' : '')}>
+			<header className={'head' + (auth.isAuth() ? ' _lk' : '')}>
 
 				<img src={logo} alt="logo" className="head__logo" />
 
-				{!!isAuth ? (
+				{auth.isAuth() ? (
 					<div className="head__profile">
 						<div className="head__name">{auth?.user?.fio}</div>
 						<div className="head__logout" onClick={(e) => {
