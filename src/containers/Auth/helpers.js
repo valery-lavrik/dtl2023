@@ -20,6 +20,20 @@ export function AuthProvider({ children }) {
 	let [user, setUser] = React.useState(null);
 
 
+	// отправить мессадж в RN
+	let sendToRN = (type, data) => {
+		if (!!window?.ReactNativeWebView) {
+			// window.WebViewBridge.onMessage(${JSON.stringify(data)});
+			window.ReactNativeWebView.postMessage(JSON.stringify({
+				location: window.location,
+				type,
+				...data
+			}));
+		}
+	}
+
+
+
 	let checkAuth = (success, error) => {
 		let user = getCookie(USER_KEY, null);
 
@@ -33,6 +47,8 @@ export function AuthProvider({ children }) {
 
 			if (!!user) {
 				setUser(user);
+				// отправить мессадж в RN
+				sendToRN('onAuth', { userId: user.login });
 				success();
 			} else {
 				error();
@@ -57,13 +73,16 @@ export function AuthProvider({ children }) {
 		// eslint-disable-next-line
 		if (login === fakeUser.login && pass == fakeUser.pass) {
 
-
 			setTimeout(() => {
 				setUser(fakeUser);
 
 				if (remember) {
 					setCookie(USER_KEY, JSON.stringify(fakeUser));
 				}
+
+				// отправить мессадж в RN
+				sendToRN('onAuth', { userId: login });
+
 				success();
 			}, 2000);
 
