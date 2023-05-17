@@ -40,8 +40,8 @@ export function AuthProvider({ children }) {
 		if (!!user) {
 			try {
 				user = JSON.parse(user);
-			} catch (error) {
-				error();
+			} catch (err) {
+				error(err);
 				return;
 			}
 
