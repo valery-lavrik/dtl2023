@@ -1,5 +1,9 @@
 import $ from 'jquery';
 import { getFromCache, saveToCache } from './cache'
+import { getCookie } from './cookie';
+import { USER_KEY } from './../../containers/Auth/helpers';
+
+
 
 function sync() {
 
@@ -84,6 +88,14 @@ function sync() {
 			});
 
 		}
+
+
+		try {
+			options.headers = { 
+				...options.headers,
+				'Authorization': 'Bearer ' + JSON.parse(getCookie(USER_KEY, '')).bearer,
+			}
+		} catch (err) {}
 
 
 

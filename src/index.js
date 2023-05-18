@@ -30,27 +30,25 @@ if (window.history?.scrollRestoration) {
 
 function App() {
 	return (
-		<React.StrictMode>
-			<ErrorBoundary>
-				<BrowserRouter basename="/">
-					<AuthProvider>
-						<Routes>
-							<Route element={<PageWrapp />}>
-								<Route path={RULES.auth} element={<Auth />} />
+		<ErrorBoundary>
+			<BrowserRouter basename="/">
+				<AuthProvider>
+					<Routes>
+						<Route element={<PageWrapp />}>
+							<Route path={RULES.auth} element={<Auth />} />
 
-								<Route path={RULES.start} element={<RequireAuth><Start /></RequireAuth>} />
-								{/* <Route path={RULES.chart} element={<RequireAuth><Chart /></RequireAuth>} /> */}
+							<Route path={RULES.start} element={<RequireAuth><Start /></RequireAuth>} />
+							{/* <Route path={RULES.chart} element={<RequireAuth><Chart /></RequireAuth>} /> */}
 
-								<Route path="*" element={<Error404 />} />
-							</Route>
-						</Routes>
+							<Route path="*" element={<Error404 />} />
+						</Route>
+					</Routes>
 
-						<Modal />
+					<Modal />
 
-					</AuthProvider>
-				</BrowserRouter>
-			</ErrorBoundary>
-		</React.StrictMode>
+				</AuthProvider>
+			</BrowserRouter>
+		</ErrorBoundary>
 	);
 }
 

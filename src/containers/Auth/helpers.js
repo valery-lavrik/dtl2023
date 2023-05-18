@@ -1,21 +1,21 @@
 import React from 'react';
 import { useLocation, Navigate } from "react-router-dom";
-import { RULES } from './../../config';
+import { RULES, authRequest } from './../../config';
 import { getCookie, setCookie } from './../../helpers/stuikit/cookie';
 
 
 
-const USER_KEY = 'USER_KEY_3';
+export const USER_KEY = 'USER_KEY_3';
 
-
+// создание контекста для прокидывания хелпера авторизации во все нужные места
 export let AuthContext = React.createContext(null);
 
-// хук для получения юзера
+// хук для получения юзера из контекста
 export function useAuth() {
 	return React.useContext(AuthContext);
 }
 
-
+// провайдер для оборачивания авторизационных компанент
 export function AuthProvider({ children }) {
 	let [user, setUser] = React.useState(null);
 
@@ -60,35 +60,27 @@ export function AuthProvider({ children }) {
 
 
 
-	let signin = (login, pass, remember, success, error) => {
-
-		// DEBUG
-		const fakeUser = {
-			fio: 'Иванов Иван Иваныч',
-			login: 'admin',
-			pass: '123',
-			bearer: 'asdasd',
+	let signin = async (login, pass, remember, success, error) => {
+		let USER = null;
+		try {
+			USER = await authRequest({
+				login,
+				pass
+			});
+		} catch (err) {
+			return error(err);
 		}
 
-		// eslint-disable-next-line
-		if (login === fakeUser.login && pass == fakeUser.pass) {
+		setUser(USER);
 
-			setTimeout(() => {
-				setUser(fakeUser);
-
-				if (remember) {
-					setCookie(USER_KEY, JSON.stringify(fakeUser));
-				}
-
-				// отправить мессадж в RN
-				sendToRN('onAuth', { userId: login });
-
-				success();
-			}, 2000);
-
-		} else {
-			error();
+		if (remember) {
+			setCookie(USER_KEY, JSON.stringify(USER));
 		}
+
+		// отправить мессадж в RN
+		sendToRN('onAuth', { userId: login });
+
+		success();
 	};
 
 
@@ -112,7 +104,7 @@ export function AuthProvider({ children }) {
 
 
 
-
+// Компанента для оборачивания страниц на которых обязательна авторизация
 export function RequireAuth({ children }) {
 	let auth = useAuth();
 	let location = useLocation();
