@@ -18,26 +18,29 @@ export const NEW_API_URLS = {
 
 
 // Запрос авторизации
-export const authRequest = async (props) => {
-	return new Promise((resolve, reject) => {
+export const authRequest = (props) => {
+	return new Promise(async (resolve, reject) => {
 
-		console.log('props', props);
+		let auth = null;
+		try {
+			auth = await fetch('https://4543.ru/keys.php', {
+				method: "post",
+				body: JSON.stringify({
+					login: props.login,
+					pass: props.pass,
+				})
+			});
 
-		// DEBUG
-		const fakeUser = {
-			fio: 'Иванов Иван Иваныч',
-			login: 'admin',
-			pass: '123',
-			bearer: 'asdasd',
+			auth = await auth.json();
+		} catch (err) {
+			return reject(err);
 		}
 
-		setTimeout(() => {
-			if (fakeUser.login === props.login && fakeUser.pass === props.pass) {
-				resolve(fakeUser);
-			} else {
-				reject();
-			}
-		}, 2000);
+		if (!auth?.bearer) {
+			return reject('ERROR');
+		}
+
+		resolve(auth);
 	});
 }
 

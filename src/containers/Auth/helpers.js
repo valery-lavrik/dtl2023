@@ -109,7 +109,7 @@ export function RequireAuth({ children }) {
 	let auth = useAuth();
 	let location = useLocation();
 
-	if (!auth?.user?.bearer) {
+	if (!auth.isAuth()) {
 		return <Navigate to={RULES.auth} state={{ from: location }} replace />;
 	}
 
